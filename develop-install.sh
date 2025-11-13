@@ -10,6 +10,14 @@ mkdir -p $PLUGINS_DIR
 mkdir -p $THEMES_DIR
 
 echo ""
+echo "=== Building and Starting Docker Containers ==="
+
+docker compose build
+docker compose up -d
+
+echo "[+] Docker containers started."
+
+echo ""
 echo "=== Cleaning plugins folder ==="
 
 # Ștergem TOT din plugins, DAR păstrăm index.php dacă există
@@ -54,5 +62,14 @@ else
 fi
 
 echo ""
+echo "=== Restarting Wordpress container to load plugins ==="
+
+docker compose restart wordpress
+
+echo ""
 echo "=== DONE ==="
-echo "Run: docker compose up --build"
+
+echo "--------------------------------------------"
+echo " WordPress:     http://localhost:8080"
+echo " phpMyAdmin:    http://localhost:8081"
+echo "--------------------------------------------"
